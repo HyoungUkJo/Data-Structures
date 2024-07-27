@@ -84,8 +84,8 @@ int main()
 			printList(&ll1);
 			printf("The resulting linked list 2: ");
 			printList(&ll2);
-			removeAllItems(&ll1);
-			removeAllItems(&ll2);
+			// removeAllItems(&ll1);
+			// removeAllItems(&ll2);
 			break;
 		case 0:
 			removeAllItems(&ll1);
@@ -104,6 +104,29 @@ int main()
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
     /* add your code here */
+	if(ll1 == NULL || ll2==NULL){
+		return;
+	}
+	ListNode *l1,*l2, *tmp1, *tmp2; //리스트노드 변수 선언
+
+	l1 = ll1 ->head;
+	l2 = ll2 ->head;
+	tmp1=l1;
+	tmp2=l2;
+	while (tmp1 != NULL && tmp2!=NULL){
+		l1 = tmp1;
+		l2 = ll2->head;
+		tmp1 = tmp1->next;
+		tmp2 = tmp2->next;
+		l1->next = ll2->head;
+		ll2->head = l2->next;
+		l2->next=tmp1;
+
+		ll1->size++;
+		ll2->size--;
+	}
+
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
