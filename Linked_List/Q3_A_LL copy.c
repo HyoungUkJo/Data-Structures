@@ -2,7 +2,7 @@
 
 /* CE1007/CZ1007 Data Structures
 Lab Test: Section A - Linked List Questions
-Purpose: Implementing the required functions for Question 4 */
+Purpose: Implementing the required functions for Question 3 */
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -27,7 +27,7 @@ typedef struct _linkedlist
 //////////////////////// function prototypes /////////////////////////////////////
 
 // You should not change the prototype of this function
-void moveEvenItemsToBack(LinkedList *ll);
+void moveOddItemsToBack(LinkedList *ll);
 
 void printList(LinkedList *ll);
 void removeAllItems(LinkedList *ll);
@@ -48,7 +48,7 @@ int main()
 
 
 	printf("1: Insert an integer to the linked list:\n");
-	printf("2: Move all even integers to the back of the linked list:\n");
+	printf("2: Move all odd integers to the back of the linked list:\n");
 	printf("0: Quit:\n");
 
 	while (c != 0)
@@ -66,8 +66,8 @@ int main()
 			printList(&ll);
 			break;
 		case 2:
-			moveEvenItemsToBack(&ll); // You need to code this function
-			printf("The resulting linked list after moving even integers to the back of the linked list is: ");
+			moveOddItemsToBack(&ll); // You need to code this function
+			printf("The resulting linked list after moving odd integers to the back of the linked list is: ");
 			printList(&ll);
 			removeAllItems(&ll);
 			break;
@@ -84,35 +84,34 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void moveEvenItemsToBack(LinkedList *ll){
-	ListNode *evnStart 	= NULL;
-	ListNode *evnEnd 	= NULL;
-	ListNode *curNode	= ll->head;
-	ListNode **preNode	= &(ll->head);
+void moveOddItemsToBack(LinkedList *ll){
+	// 홀수를 만났을 경우 홀수 리스트를 만들어서 마지막에 붙여 넣는 방식으로.
+	ListNode *oddStart	= NULL;
+	ListNode *oddEnd 	= NULL;
+	ListNode *curNode 	= ll->head;
+	ListNode **preNode 	= &(ll->head);
 
-	while (curNode !=NULL){
-		if ((curNode->item)%2==1){
+	while (curNode!=NULL){
+		if((curNode->item)%2==0){
 			preNode = &(curNode->next);
-			curNode = curNode->next;
+			curNode=curNode->next;
 		}
-		else if (evnStart==NULL){
-			evnStart=evnEnd=curNode;
+		else if(oddStart=NULL){
+			oddStart = oddEnd = curNode;
 			*preNode = curNode->next;
-			curNode->next = NULL;
-			curNode = *preNode;
+			curNode->next =NULL;
 		}
 		else {
-			*preNode=curNode->next;
-			curNode->next=NULL;
-			evnEnd->next = curNode;
-			evnEnd=curNode;
-			curNode=*preNode;
+			*preNode = curNode->next;
+			oddEnd-> next = curNode;
+			curNode->next =NULL;
+			oddEnd = curNode;
+			curNode = *preNode;
 		}
 	}
 	if(preNode!=NULL){
-		*preNode = evnStart;
+		*preNode = oddStart;
 	}
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

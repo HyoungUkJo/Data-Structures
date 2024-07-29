@@ -84,9 +84,41 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void moveOddItemsToBack(LinkedList *ll)
-{
-	/* add your code here */
+void moveOddItemsToBack(LinkedList *ll){
+	//
+	ListNode **preNode = &(ll->head); 	// 현재노드의 위치를 저장해놓을 포인터 변수
+										// 
+	ListNode *curNode = ll->head; 		//현재 노드 선언
+
+	ListNode *oddStart=NULL;
+	ListNode *oddEnd=NULL; 	// 홀수노드의 시작점을 가리키는 포인터
+										// 홀수노드의 처음과 끝을 한번에 덤긴다.
+
+	while (curNode !=NULL){
+		//홀수를 만나면 다음도 홀수인지 판별
+		if((curNode->item)%2==0){
+			preNode = &(curNode->next); //preNode포인터를 다음노드로 변경
+			curNode = curNode->next; 	// 현재노드 포인터를 다음 노드로 변경
+		}
+		else if (oddStart ==NULL){		// 만약 홀수를 만났을 경우에 oddstart의 값이 비워져 있을경우
+										// -> 첫번째 홀수
+			oddStart = oddEnd = curNode;
+			*preNode = curNode->next;	//prenode 가 가리키고 있는 다음 주소에 다음노드의 주소를 저장한다.
+			curNode->next = NULL; 		// 현재노드의 다음값을 NULL로 설정한다. 현재 리스트에서 현재 노드를 끊음
+			curNode = *preNode;			// 현재 노드를 다음 노드로 변경
+		}	
+		else {
+			*preNode = curNode->next;	//preNode가 가리키고 있는 다음 주소를 curNode의 다음주소로 변경
+			oddEnd->next = curNode;		//oddEnd가 가리키고 있는 노드의 다음 주소를 현재 노드로 변경
+			oddEnd = curNode;			// oddEnd를 현재 노드를 가리키게 변경
+			curNode->next = NULL;		// 현재 노드의 다음주소는 NULL로 변경
+			curNode = *preNode;			//현재 노드는 *preNode로 변경해서 다음 주소를 가리키게 변경
+		}			
+	}
+	if (preNode !=NULL){				//만약 preNode가 가리키는게 없다면 비워져 있는 리스트 임으로?
+		*preNode = oddStart;
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
