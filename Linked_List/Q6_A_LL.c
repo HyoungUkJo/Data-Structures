@@ -71,7 +71,7 @@ int main()
 			moveMaxToFront(&(ll.head));  // You need to code this function
 			printf("The resulting linked list after moving largest stored value to the front of the list is: ");
 			printList(&ll);
-			removeAllItems(&ll);
+			// removeAllItems(&ll);
 			break;
 		case 0:
 			removeAllItems(&ll);
@@ -86,9 +86,29 @@ int main()
 
 ////////////////////////////////////////////////////////////////////////
 
-int moveMaxToFront(ListNode **ptrHead)
-{
+int moveMaxToFront(ListNode **ptrHead){
     /* add your code here */
+	// 2차원 배열로 ptrHead가 주워졌음.
+	
+	ListNode *maxNode = *ptrHead;
+	ListNode *curNode = *ptrHead;
+	ListNode *preNode = NULL;
+	ListNode *tmp 	  = NULL;
+
+	while(curNode->next !=NULL){
+		if(curNode->next->item > maxNode->item){
+			maxNode=curNode->next;
+			preNode = curNode;
+			curNode = curNode->next;
+		}
+		else {
+			curNode = curNode->next;
+		}
+	}
+	preNode->next = maxNode->next;
+	tmp=(*ptrHead);
+	*ptrHead = maxNode;
+	maxNode->next = tmp;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
