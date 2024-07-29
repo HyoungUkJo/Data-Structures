@@ -103,6 +103,48 @@ int main()
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
 	/* add your code here */
+	ListNode *curNode = ll->head;
+	ListNode **preNode = &(ll->head);
+	ListNode *frontNode = NULL;
+	ListNode *backNode = NULL;
+
+	int mid = (ll->size +1)>>1;
+	int i=0; 
+	while (i<mid){
+		if(frontNode==NULL){
+			frontNode = curNode;
+			*preNode = curNode->next;
+			curNode->next = NULL;
+			curNode=*preNode;
+			resultFrontList->head=frontNode;
+		}
+		else{
+			frontNode->next = curNode;
+			*preNode = curNode->next;
+			curNode->next = NULL;
+			frontNode = curNode;
+			curNode = *preNode;
+		}
+		i++;
+	}
+	i=0;
+	while(curNode!=NULL){
+		if(backNode==NULL){
+			backNode = curNode;
+			*preNode = curNode->next;
+			curNode->next = NULL;
+			curNode=*preNode;
+			resultBackList->head = backNode;
+		}
+		else{
+			backNode->next = curNode;
+			*preNode = curNode->next;
+			curNode->next = NULL;
+			backNode = curNode;
+			curNode = *preNode;
+		}
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
