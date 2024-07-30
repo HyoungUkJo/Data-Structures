@@ -112,6 +112,26 @@ int main()
 void removeUntil(Stack *s, int value)
 {
 /* add your code here */
+	int a = 0;
+	
+/* 	해당 숫자가 차례대로 들어왔을때
+	if (a==value){
+		removeAllItemsFromStack(s);
+		push(s,a);
+		return ;
+	}
+	removeUntil(s,value);
+	push(s,a); */
+
+// 해당 숫자로 이미 정렬이 되어있을때
+	for(int i=0; i<s->ll.size;i++){
+		a=pop(s);
+		if(a==value){
+			push(s,a);
+			break;
+		}
+	}
+	
 }
 
 //////////////////////////////////////////////////////////////////////////////////
