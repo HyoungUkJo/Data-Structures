@@ -8,6 +8,7 @@ Purpose: Implementing the required functions for Question 7 */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>	//문자열 길이를 확인하기 위한 라이브러리 추가
 
 #define MIN_INT -1000
 
@@ -105,6 +106,30 @@ int main()
 int balanced(char *expression)
 {
 /* add your code here */
+	Stack s;
+	s.ll.head=NULL;
+	s.ll.size=0;
+
+	char e = *expression;
+	char tmp;
+
+	while(e!='\0'){
+		if(e=='{'||e=='('||e=='['){
+			push(&s,e);
+		}
+		if(e=='}'||e==')'||e==']'){
+			if (isEmptyStack(&s))
+				return 1;
+			tmp = pop(&s);
+			if(tmp=='{'&&e!='}') return 1;
+			if(tmp=='['&&e!=']') return 1;
+			if(tmp=='('&&e!=')') return 1;
+		}
+		expression += 1;
+		e = *expression;	
+	}
+	// removeAllItemsFromStack(&s);
+	return 0;
 }
 
 ////////////////////////////////////////////////////////////
