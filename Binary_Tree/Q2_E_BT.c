@@ -94,10 +94,23 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int maxHeight(BTNode *node)
-
-{
+int maxHeight(BTNode *node){
     /* add your code here */
+    int depth_L =0;
+    int depth_R=0;
+
+/*     if(node==NULL)
+        return 0; */
+    if(node->left!=NULL)
+        depth_L = maxHeight(node->left)+1;
+    
+    if(node->right!=NULL)
+        depth_R = maxHeight(node->right)+1;
+
+    if (depth_L>=depth_R)
+        return depth_L;
+
+    return depth_R;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
