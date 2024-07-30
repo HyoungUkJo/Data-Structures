@@ -98,10 +98,22 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int countOneChildNodes(BTNode *node)
-
-{
+int countOneChildNodes(BTNode *node){
     /* add your code here */
+
+    int res_L = 0;
+    int res_R = 0;
+
+    if(node->left==NULL || node->right==NULL){
+        if(node->left==NULL && node->right==NULL)
+            return 0;
+        return 1;
+    }
+    res_L = countOneChildNodes(node->left);
+    res_R = countOneChildNodes(node->right);
+
+    return res_L + res_R;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
