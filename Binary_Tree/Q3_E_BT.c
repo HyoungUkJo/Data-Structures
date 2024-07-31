@@ -111,7 +111,7 @@ int countOneChildNodes(BTNode *node){
     }
     res_L = countOneChildNodes(node->left);
     res_R = countOneChildNodes(node->right);
-
+3ㅊ 
     return res_L + res_R;
 
 }
