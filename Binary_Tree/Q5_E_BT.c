@@ -24,7 +24,7 @@ typedef struct _stackNode
 {
     BTNode *btnode;
     struct _stackNode *next;
-} StackNode;
+} StackNode; 
 
 typedef struct _stack
 {
@@ -106,6 +106,21 @@ int main()
 void mirrorTree(BTNode *node)
 {
 	/* add your code here */
+    if(node==NULL){
+        return ;
+    }
+    
+    if(node->right ==NULL && node->left ==NULL){
+        return;
+    }
+    BTNode * tmpNode;
+
+    tmpNode     = node->left;
+    node->left  = node->right;
+    node->right = tmpNode;
+
+    mirrorTree(node->left);
+    mirrorTree(node->right);
 }
 
 //////////////////////////////////////////////////////////////////////////////////
